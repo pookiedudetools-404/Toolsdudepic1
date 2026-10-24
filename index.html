@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Premium browser-based image enhancer with 3 enhancement engines — Canvas, Pica, and AI UpscalerJS." />
+  <title>Lumina · Premium Image Enhancer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated background -->
+  <div class="bg-aurora" aria-hidden="true">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+    <span class="grid-overlay"></span>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="#" class="brand">
+        <span class="brand-mark">◈</span>
+        <span class="brand-name">Lumina</span>
+      </a>
+      <div class="nav-links">
+        <a href="#enhancer">Enhancer</a>
+        <a href="#methods">Methods</a>
+        <a href="#about">About</a>
+        <a href="https://github.com" target="_blank" rel="noopener" class="nav-cta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.9-.39.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.25 5.68.41.35.78 1.05.78 2.12v3.14c0 .31.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero" id="about">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      100% Client-Side · Powered by WebAssembly & AI
+    </div>
+    <h1 class="hero-title">
+      Enhance any image to
+      <span class="gradient-text">studio quality</span>
+      right in your browser
+    </h1>
+    <p class="hero-subtitle">
+      Three powerful engines — classic Canvas processing, high-quality Pica resampling, and a real
+      AI upscaler. No uploads, no servers, no tracking. Your photos never leave your device.
+    </p>
+    <div class="hero-cta">
+      <a href="#enhancer" class="primary-btn large">Start Enhancing →</a>
+      <a href="#methods" class="ghost-btn large">Explore engines</a>
+    </div>
+    <div class="hero-stats">
+      <div><strong>3</strong><span>Engines</span></div>
+      <div><strong>4×</strong><span>Max upscale</span></div>
+      <div><strong>0</strong><span>Server uploads</span></div>
+      <div><strong>∞</strong><span>Free forever</span></div>
+    </div>
+  </header>
+
+  <!-- Main app -->
+  <main class="app-shell" id="enhancer">
+
+    <!-- Step indicator -->
+    <div class="stepper">
+      <div class="step active" data-step="1">
+        <span class="step-num">1</span>
+        <span class="step-label">Upload</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" data-step="2">
+        <span class="step-num">2</span>
+        <span class="step-label">Configure</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" data-step="3">
+        <span class="step-num">3</span>
+        <span class="step-label">Download</span>
+      </div>
+    </div>
+
+    <!-- Upload panel -->
+    <section class="panel upload-panel">
+      <div class="panel-head">
+        <h2>Upload your image</h2>
+        <p>Drop a file or click to browse. Max 20 MB recommended.</p>
+      </div>
+
+      <label for="file-input" class="drop-zone" id="drop-zone">
+        <div class="drop-glow"></div>
+        <div class="drop-inner">
+          <div class="drop-icon">
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <p class="drop-title">Drag &amp; drop your image here</p>
+          <p class="drop-sub">or <span class="link">browse files</span> from your device</p>
+          <p class="drop-hint">JPG · PNG · WebP · GIF · BMP · Max 20 MB</p>
+        </div>
+        <input type="file" id="file-input" accept="image/*" hidden />
+      </label>
+
+      <div class="file-info hidden" id="file-info">
+        <div class="file-thumb"><img id="thumb-img" alt="preview" /></div>
+        <div class="file-meta">
+          <span class="file-name" id="file-name">—</span>
+          <span class="file-sub" id="file-sub">—</span>
+        </div>
+        <button class="icon-btn" id="clear-file" title="Remove file" type="button">✕</button>
+      </div>
+    </section>
+
+    <!-- Configure panel -->
+    <section class="panel config-panel" id="methods">
+      <div class="panel-head">
+        <h2>Choose an engine</h2>
+        <p>Each engine offers a different trade-off between speed and quality.</p>
+      </div>
+
+      <div class="engines">
+        <label class="engine-card" data-engine="canvas">
+          <input type="radio" name="method" value="canvas" checked />
+          <div class="engine-check">✓</div>
+          <div class="engine-top">
+            <span class="engine-icon">⚡</span>
+            <span class="engine-tag tag-fast">Fastest</span>
+          </div>
+          <h3>Canvas Classic</h3>
+          <p>Native bicubic upscale with smart sharpening. Runs in pure JavaScript with zero dependencies.</p>
+          <ul class="engine-features">
+            <li>Instant processing</li>
+            <li>No downloads needed</li>
+            <li>Best for quick fixes</li>
+          </ul>
+        </label>
+
+        <label class="engine-card" data-engine="pica">
+          <input type="radio" name="method" value="pica" />
+          <div class="engine-check">✓</div>
+          <div class="engine-top">
+            <span class="engine-icon">🎯</span>
+            <span class="engine-tag tag-balanced">Balanced</span>
+          </div>
+          <h3>Pica Resampler</h3>
+          <p>Lanczos filtering in WebAssembly for crisp, artifact-free resizing with excellent color fidelity.</p>
+          <ul class="engine-features">
+            <li>High fidelity scaling</li>
+            <li>Fast WASM engine</li>
+            <li>Best for photos</li>
+          </ul>
+        </label>
+
+        <label class="engine-card" data-engine="ai">
+          <input type="radio" name="method" value="ai" />
+          <div class="engine-check">✓</div>
+          <div class="engine-top">
+            <span class="engine-icon">🤖</span>
+            <span class="engine-tag tag-ai">AI · Best Quality</span>
+          </div>
+          <h3>UpscalerJS (AI)</h3>
+          <p>TensorFlow.js-powered neural network upscales images in your browser with astonishing detail.</p>
+          <ul class="engine-features">
+            <li>Neural net upscaling</li>
+            <li>Restores fine detail</li>
+            <li>Best for old photos</li>
+          </ul>
+        </label>
+      </div>
+
+      <div class="scale-row">
+        <div class="scale-head">
+          <span>Upscale factor</span>
+          <strong id="scale-value">2×</strong>
+        </div>
+        <input type="range" id="scale-input" min="1" max="4" step="1" value="2" />
+        <div class="scale-marks">
+          <span>1×</span><span>2×</span><span>3×</span><span>4×</span>
+        </div>
+      </div>
+
+      <button id="enhance-btn" class="primary-btn large full" disabled>
+        <span class="btn-label">✨ Enhance Image</span>
+        <span class="btn-glow"></span>
+      </button>
+    </section>
+
+    <!-- Preview panel -->
+    <section class="panel preview-panel hidden" id="preview-panel">
+      <div class="panel-head">
+        <h2>Compare results</h2>
+        <p>Slide your eye between original and enhanced output.</p>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-box">
+          <div class="compare-head">
+            <span class="pill pill-original">Original</span>
+            <span class="info" id="original-info">—</span>
+          </div>
+          <div class="compare-img">
+            <img id="original-img" alt="Original" />
+          </div>
+        </div>
+
+        <div class="compare-box compare-box-enhanced">
+          <div class="compare-head">
+            <span class="pill pill-enhanced">Enhanced</span>
+            <span class="info" id="enhanced-info">—</span>
+          </div>
+          <div class="compare-img">
+            <img id="enhanced-img" alt="Enhanced" />
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-actions">
+        <button id="download-btn" class="primary-btn large" disabled>
+          <span class="btn-label">⬇️ Download Enhanced</span>
+          <span class="btn-glow"></span>
+        </button>
+        <button id="reset-btn" class="ghost-btn large">↺ Try Another</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Feature strip -->
+  <section class="features">
+    <div class="feature">
+      <span class="feature-icon">🔒</span>
+      <h4>Fully private</h4>
+      <p>Every pixel is processed locally. Nothing is ever uploaded.</p>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">⚙️</span>
+      <h4>Three engines</h4>
+      <p>Pick the ideal algorithm for your specific image type.</p>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">🚀</span>
+      <h4>Zero install</h4>
+      <p>Just open the page — works on desktop and mobile browsers.</p>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">💸</span>
+      <h4>Free forever</h4>
+      <p>No account, no limits, no watermarks. Ever.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="brand small">
+        <span class="brand-mark">◈</span>
+        <span class="brand-name">Lumina</span>
+      </div>
+      <p>Premium browser-based image enhancement · Made with ❤️ for the open web</p>
+      <p class="footer-sub">Powered by Canvas API · Pica.js · TensorFlow.js · UpscalerJS</p>
+    </div>
+  </footer>
+
+  <!-- Global loader overlay -->
+  <div class="loader-overlay hidden" id="loader">
+    <div class="loader-card">
+      <div class="spinner"></div>
+      <h3 id="loader-title">Enhancing your image…</h3>
+      <p id="loader-text">Preparing engine</p>
+      <div class="progress-bar"><span id="progress-fill"></span></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast hidden" id="toast"></div>
+
+  <!-- External libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/pica@9.0.1/dist/pica.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@upscalerjs/default-model@latest/dist/umd/index.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/upscaler@latest/dist/umd/index.min.js"></script>
+
+  <!-- App scripts -->
+  <script src="enhancers.js"></script>
+  <script src="app.js"></script>
+</body>
+    </html>
